@@ -154,16 +154,16 @@ public:
 
 		std::lock_guard<std::mutex> guard(_mutex);
 
-		int nSuccCount = 0;
+		int nSuccessCount = 0;
 		for (int i = 0; i < nSendTimes; i++)
 		{
 			if (SendTo(&pack))
 			{
-				++nSuccCount;
+				++nSuccessCount;
 			}
 		}
 
-		return nSuccCount != 0;
+		return nSuccessCount != 0;
 	}
 
 private:
@@ -173,11 +173,11 @@ private:
 			return false;
 		}
 
-		struct sockaddr_in LocalAddr;
-		LocalAddr.sin_family = AF_INET;
-		LocalAddr.sin_port = htons(_bindPort);
-		LocalAddr.sin_addr.s_addr = INADDR_ANY;
-		if (bind(_socket, (struct sockaddr *)&LocalAddr, sizeof(LocalAddr)))
+		struct sockaddr_in localAddr;
+		localAddr.sin_family = AF_INET;
+		localAddr.sin_port = htons(_bindPort);
+		localAddr.sin_addr.s_addr = INADDR_ANY;
+		if (bind(_socket, (struct sockaddr *)&localAddr, sizeof(localAddr)))
 		{
 			LOG_ERROR("bind socket fail:%s", strerror(errno));
 			_bindPort = -1;
@@ -229,25 +229,25 @@ private:
 			return;
 		}
 
-		PackDataInfo_t PackDataInfo;
-		struct sockaddr_in SockAddr;
+		PackDataInfo_t packDataInfo;
+		struct sockaddr_in sockAddr;
 		socklen_t fromlen = sizeof(struct sockaddr_in);
-		memset(&SockAddr, 0, sizeof(struct sockaddr_in));
-		PackDataInfo.nDataSize = ::recvfrom(pParent->_socket,
-			PackDataInfo.szDataBuf,
-			sizeof(PackDataInfo.szDataBuf),
+		memset(&sockAddr, 0, sizeof(struct sockaddr_in));
+		packDataInfo.nDataSize = ::recvfrom(pParent->_socket,
+			packDataInfo.szDataBuf,
+			sizeof(packDataInfo.szDataBuf),
 			0,
-			(struct sockaddr *)&SockAddr,
+			(struct sockaddr *)&sockAddr,
 			&fromlen);
 
-		if (PackDataInfo.nDataSize <= 0)
+		if (packDataInfo.nDataSize <= 0)
 		{
 			return;
 		}
 
-		inet_ntop(AF_INET, &SockAddr.sin_addr, PackDataInfo.szIP,
-			sizeof(PackDataInfo.szIP));
-		pParent->_cb(&PackDataInfo);		
+		inet_ntop(AF_INET, &sockAddr.sin_addr, packDataInfo.szIP,
+			sizeof(packDataInfo.szIP));
+		pParent->_cb(&packDataInfo);
 	}
 
 	mutable std::mutex _mutex;
