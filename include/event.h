@@ -110,8 +110,7 @@ public:
 		return bak;
 	}
 
-	bool WaitMs(int millisecond)
-	{
+	bool WaitMs(int millisecond) {
 		return WaitUs(millisecond * 1000);
 	}
 

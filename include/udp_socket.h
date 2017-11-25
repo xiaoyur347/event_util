@@ -34,9 +34,8 @@ struct PackDataInfo_t
 	char szDataBuf[4096];
 
 	PackDataInfo_t()
-		:nDataSize(0),
-		 nPort(0)
-	{
+		: nDataSize(0),
+		  nPort(0) {
 		memset(szIP, 0, sizeof(szIP));
 		memset(szDataBuf, 0, sizeof(szDataBuf));
 	}
@@ -79,8 +78,7 @@ public:
 		}
 	}
 
-	void SetCallback(Callback cb)
-	{
+	void SetCallback(Callback cb) {
 		_cb = cb;
 	}
 

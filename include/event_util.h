@@ -205,8 +205,7 @@ public:
 	/**
 	 * \note  not restart the timer
 	 */
-	void SetInterval(int millisecond)
-	{
+	void SetInterval(int millisecond) {
 		_millisecond = millisecond;
 	}
 
@@ -214,28 +213,23 @@ public:
 	 * \note not restart the timer
 	 * \param  singleShot -- true run once, false loop forever
 	 */
-	void SetSingleShot(bool singleShot)
-	{
+	void SetSingleShot(bool singleShot) {
 		_singleShot = singleShot;
 	}
 
-	void SetCallback(std::function<void()> cb)
-	{
+	void SetCallback(std::function<void()> cb) {
 		_cb = cb;
 	}
 
-	bool IsActive() const
-	{
+	bool IsActive() const {
 		return _active;
 	}
 
-	bool IsSingleShot() const
-	{
+	bool IsSingleShot() const {
 		return _singleShot;
 	}
 
-	int GetInterval() const
-	{
+	int GetInterval() const {
 		return _millisecond;
 	}
 
