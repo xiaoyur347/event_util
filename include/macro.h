@@ -8,9 +8,7 @@
 #include <stdio.h>
 #include <libgen.h>
 
-/** 亮色 */
 #define BRIGHT		1
-/** 背景为黑色 */
 #define BG_BLACK	40
 
 #define LOG_DEBUG(format, ...) printf("[%s][%s:%d][Debug]" format "\n", \
