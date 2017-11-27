@@ -301,7 +301,7 @@ private:
 			return false;
 		}
 
-		if (_event == NULL && millisecond > 0 && CreateTimer() < 0)
+		if (_event == NULL && millisecond > 0 && !CreateTimer())
 		{
 			return false;
 		}
